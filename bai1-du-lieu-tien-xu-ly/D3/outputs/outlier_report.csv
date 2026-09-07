@@ -1,0 +1,14 @@
+﻿attribute,count_z_gt_3
+Severity,130
+Start_Lat,0
+Start_Lng,0
+End_Lat,0
+End_Lng,0
+Distance(mi),965
+Temperature(F),2068
+Wind_Chill(F),215
+Humidity(%),0
+Pressure(in),1980
+Visibility(mi),8381
+Wind_Speed(mph),355
+Precipitation(in),50
