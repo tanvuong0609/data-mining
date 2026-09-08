@@ -3,6 +3,21 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# file data too large
+*.csv
+*.tsv
+*.zip
+*.7z
+*.parquet
+*.feather
+*.h5
+*.hdf5
+
+# --- Cache của kagglehub / kaggle API ---
+~/.cache/kagglehub/
+.cache/
+kaggle.json
+
 # C extensions
 *.so
 
