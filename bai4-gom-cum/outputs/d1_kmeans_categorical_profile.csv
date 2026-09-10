@@ -1,0 +1,4 @@
+cluster,n,top_hotel,top_arrival_date_month,top_meal,top_country,top_market_segment,top_distribution_channel,top_reserved_room_type,top_assigned_room_type,top_deposit_type,top_customer_type
+0,148,City Hotel,March,BB,PRT,Corporate,Corporate,A,A,No Deposit,Transient
+1,1099,Resort Hotel,August,BB,PRT,Online TA,TA/TO,A,A,No Deposit,Transient
+2,3753,City Hotel,October,BB,PRT,Online TA,TA/TO,A,A,No Deposit,Transient

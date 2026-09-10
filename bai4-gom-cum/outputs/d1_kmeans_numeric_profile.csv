@@ -1,0 +1,4 @@
+cluster,lead_time,arrival_date_year,arrival_date_week_number,arrival_date_day_of_month,stays_in_weekend_nights,stays_in_week_nights,adults,children,babies,is_repeated_guest,previous_cancellations,previous_bookings_not_canceled,booking_changes,agent,days_in_waiting_list,adr,required_car_parking_spaces,total_of_special_requests,total_stay
+0,35.804,2016.223,26.189,15.554,0.432,1.554,1.392,0.027,0.0,0.973,0.716,4.966,0.243,52.622,0.419,71.641,0.216,0.723,1.986
+1,123.813,2016.203,28.557,15.974,1.982,4.821,1.975,0.239,0.035,0.0,0.021,0.008,0.39,156.984,0.341,115.954,0.099,0.819,6.803
+2,98.227,2016.123,27.179,15.81,0.66,1.895,1.838,0.062,0.002,0.0,0.084,0.018,0.176,52.036,3.056,98.211,0.043,0.528,2.554

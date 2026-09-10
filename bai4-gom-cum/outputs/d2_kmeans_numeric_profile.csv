@@ -1,0 +1,3 @@
+cluster,user_id,orders,products,unique_products,reorder_rate,mean_cart_position
+0,102952.288,1.267,22.635,22.261,0.589,10.329
+1,103393.3,1.04,6.932,6.912,0.591,3.896

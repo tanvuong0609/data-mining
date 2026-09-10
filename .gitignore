@@ -1,0 +1,9 @@
+﻿.venv/
+__pycache__/
+*.pyc
+
+# Dataset lớn
+**/data/raw/*.csv
+
+# File dữ liệu đã xử lý lớn
+**/data/processed/*.csv

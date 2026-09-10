@@ -1,0 +1,10 @@
+cluster,n,top_hotel,top_arrival_date_month,top_meal,top_country,top_market_segment,top_distribution_channel,top_reserved_room_type,top_assigned_room_type,top_deposit_type,top_customer_type
+-1,4793,City Hotel,August,BB,PRT,Online TA,TA/TO,A,A,No Deposit,Transient
+0,65,City Hotel,August,BB,PRT,Groups,TA/TO,A,A,Non Refund,Contract
+1,31,City Hotel,April,BB,PRT,Groups,TA/TO,A,A,Non Refund,Transient
+2,13,City Hotel,June,SC,DEU,Online TA,TA/TO,A,A,No Deposit,Transient
+3,23,City Hotel,September,HB,PRT,Offline TA/TO,TA/TO,A,A,No Deposit,Transient-Party
+4,34,City Hotel,July,BB,PRT,Groups,TA/TO,A,A,Non Refund,Transient
+5,13,City Hotel,September,BB,PRT,Groups,TA/TO,A,A,Non Refund,Transient
+6,14,City Hotel,February,BB,PRT,Groups,TA/TO,A,A,Non Refund,Transient
+7,14,City Hotel,March,SC,FRA,Online TA,TA/TO,A,A,No Deposit,Transient
