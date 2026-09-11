@@ -13,6 +13,9 @@ __pycache__/
 *.h5
 *.hdf5
 
+# Cho phép push riêng CSV đã xử lý trong data/processed/ (không quá nặng)
+!data/processed/**/*.csv
+
 # --- Cache của kagglehub / kaggle API ---
 ~/.cache/kagglehub/
 .cache/
