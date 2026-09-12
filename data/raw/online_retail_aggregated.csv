@@ -1,0 +1,201 @@
+CustomerID,Recency,Frequency,Monetary,Country
+1000,35,6,43.62,Germany
+1001,10,5,42.32,Spain
+1002,7,6,96.86,United Kingdom
+1003,24,6,178.09,United Kingdom
+1004,38,3,104.7,France
+1005,16,4,62.21,Spain
+1006,118,4,95.29,Portugal
+1007,34,6,41.25,United Kingdom
+1008,19,6,113.89,United Kingdom
+1009,14,4,94.52,France
+1010,12,4,35.1,Spain
+1011,39,2,90.49,Portugal
+1012,17,4,33.36,Germany
+1013,1,4,13.2,France
+1014,15,3,60.07,United Kingdom
+1015,40,2,93.85,Germany
+1016,6,11,76.07,Spain
+1017,5,3,168.2,France
+1018,22,1,140.43,Portugal
+1019,22,3,129.71,United Kingdom
+1020,30,6,109.55,United Kingdom
+1021,56,6,190.46,Portugal
+1022,38,3,28.27,United Kingdom
+1023,28,3,77.18,Germany
+1024,38,9,31.31,Spain
+1025,11,6,94.92,United Kingdom
+1026,13,7,85.81,France
+1027,7,2,178.46,Germany
+1028,10,4,24.59,France
+1029,29,5,28.14,Spain
+1030,2,7,107.89,Spain
+1031,17,9,173.49,United Kingdom
+1032,16,3,13.21,United Kingdom
+1033,20,4,78.55,United Kingdom
+1034,16,4,221.08,Germany
+1035,11,5,169.56,France
+1036,16,3,131.81,Portugal
+1037,67,4,39.28,Germany
+1038,86,4,103.11,Portugal
+1039,20,9,118.33,Portugal
+1040,29,2,147.1,Portugal
+1041,3,4,168.34,United Kingdom
+1042,11,6,85.34,Portugal
+1043,16,5,54.01,France
+1044,60,5,61.82,United Kingdom
+1045,8,4,166.04,France
+1046,19,6,63.04,Spain
+1047,127,6,36.2,France
+1048,21,3,349.97,Portugal
+1049,28,4,15.12,Spain
+1050,3,4,53.71,Portugal
+1051,52,4,104.65,Germany
+1052,27,8,85.76,Portugal
+1053,23,9,84.69,Spain
+1054,12,7,230.32,Portugal
+1055,10,4,30.65,Spain
+1056,16,3,51.26,Germany
+1057,34,5,91.57,Portugal
+1058,62,7,303.1,Spain
+1059,21,5,117.54,Spain
+1060,33,4,61.27,Spain
+1061,26,4,53.63,Spain
+1062,29,5,30.68,Portugal
+1063,33,5,175.87,United Kingdom
+1064,55,13,88.62,France
+1065,2,6,40.48,Spain
+1066,43,4,230.0,United Kingdom
+1067,8,5,91.71,Portugal
+1068,6,4,55.91,Germany
+1069,25,4,48.43,Spain
+1070,3,4,40.06,United Kingdom
+1071,64,9,113.84,United Kingdom
+1072,29,6,26.85,Germany
+1073,38,7,271.27,United Kingdom
+1074,0,6,218.03,United Kingdom
+1075,27,4,59.5,France
+1076,24,7,139.59,Portugal
+1077,5,6,35.22,Germany
+1078,4,7,65.65,Spain
+1079,35,4,51.42,France
+1080,11,5,37.17,Spain
+1081,35,8,214.34,France
+1082,24,3,98.65,United Kingdom
+1083,14,5,54.35,Germany
+1084,77,6,26.06,France
+1085,55,2,77.22,United Kingdom
+1086,13,6,23.36,France
+1087,1,5,28.65,Portugal
+1088,10,5,121.36,Germany
+1089,15,11,157.82,Portugal
+1090,36,5,8.79,Spain
+1091,161,9,34.69,Portugal
+1092,13,5,136.97,United Kingdom
+1093,43,7,50.7,Spain
+1094,26,2,109.57,Spain
+1095,35,6,145.05,Spain
+1096,4,4,214.96,Germany
+1097,15,5,60.71,Spain
+1098,8,3,296.81,Portugal
+1099,12,6,57.26,Spain
+1100,21,3,328.55,Germany
+1101,32,4,161.91,France
+1102,3,6,117.36,Germany
+1103,4,7,11.83,Germany
+1104,11,9,19.12,Portugal
+1105,32,1,152.22,France
+1106,56,6,36.93,United Kingdom
+1107,24,8,65.41,Spain
+1108,57,5,250.63,Spain
+1109,14,3,69.34,Portugal
+1110,11,7,138.22,United Kingdom
+1111,13,9,160.52,France
+1112,5,2,120.36,Germany
+1113,53,3,16.17,Spain
+1114,12,5,130.44,France
+1115,24,12,20.44,Portugal
+1116,25,2,9.15,Germany
+1117,22,3,197.35,Portugal
+1118,0,3,90.74,Germany
+1119,133,3,118.7,Germany
+1120,70,3,129.93,Spain
+1121,6,1,34.28,Portugal
+1122,10,9,132.02,France
+1123,22,3,247.13,France
+1124,69,6,47.53,Spain
+1125,123,6,10.78,United Kingdom
+1126,8,6,117.45,Germany
+1127,24,2,116.64,Germany
+1128,49,4,64.81,France
+1129,15,4,226.55,France
+1130,39,3,126.08,United Kingdom
+1131,5,5,179.53,Portugal
+1132,27,0,3.9,United Kingdom
+1133,60,3,29.29,Portugal
+1134,123,3,53.68,Portugal
+1135,2,4,68.54,Spain
+1136,16,4,130.78,Spain
+1137,6,1,149.35,Portugal
+1138,17,8,15.3,Portugal
+1139,23,4,115.4,Portugal
+1140,2,4,30.78,United Kingdom
+1141,10,5,21.69,Spain
+1142,78,5,179.35,United Kingdom
+1143,25,1,33.01,Spain
+1144,18,4,52.94,Germany
+1145,42,2,40.71,Germany
+1146,40,5,19.05,France
+1147,1,4,51.49,Spain
+1148,37,1,95.59,Spain
+1149,54,7,16.9,Portugal
+1150,5,3,114.28,France
+1151,45,4,17.32,Germany
+1152,10,4,189.21,Germany
+1153,10,2,59.5,United Kingdom
+1154,32,4,82.35,Germany
+1155,3,3,170.48,United Kingdom
+1156,32,5,127.87,United Kingdom
+1157,65,5,121.08,United Kingdom
+1158,35,3,129.31,Germany
+1159,17,6,17.4,Spain
+1160,17,5,80.74,Portugal
+1161,43,10,161.63,Portugal
+1162,25,4,180.2,United Kingdom
+1163,2,2,33.65,Spain
+1164,26,8,23.12,France
+1165,50,2,60.46,Germany
+1166,12,0,8.49,Germany
+1167,78,2,111.13,Portugal
+1168,41,1,41.79,United Kingdom
+1169,25,2,61.3,Spain
+1170,41,4,54.16,Spain
+1171,2,2,112.65,Germany
+1172,58,2,72.28,Spain
+1173,51,5,107.84,Spain
+1174,72,6,30.83,Germany
+1175,4,8,108.62,Spain
+1176,2,3,33.79,Spain
+1177,4,6,116.0,Portugal
+1178,15,6,23.68,Germany
+1179,16,9,51.95,United Kingdom
+1180,24,6,78.37,United Kingdom
+1181,3,1,89.38,Portugal
+1182,6,5,142.99,Germany
+1183,50,2,39.79,Portugal
+1184,18,4,43.71,United Kingdom
+1185,49,7,34.39,Germany
+1186,0,5,46.16,Germany
+1187,24,9,151.5,Portugal
+1188,80,4,250.99,Germany
+1189,26,4,213.02,Germany
+1190,6,6,159.93,Spain
+1191,37,7,212.88,United Kingdom
+1192,14,4,164.69,France
+1193,33,7,8.69,Portugal
+1194,0,2,111.63,Spain
+1195,30,2,137.87,Germany
+1196,0,2,50.49,France
+1197,40,6,136.49,Germany
+1198,19,6,53.29,France
+1199,3,11,259.76,Portugal
