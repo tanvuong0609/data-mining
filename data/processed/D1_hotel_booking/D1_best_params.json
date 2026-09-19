@@ -1,0 +1,9 @@
+{
+  "Logistic Regression": {
+    "clf__C": 0.5
+  },
+  "Decision Tree": {
+    "clf__max_depth": 14,
+    "clf__min_samples_leaf": 50
+  }
+}
