@@ -1,222 +1,205 @@
-# Hotel Booking Demand - Phan tich tong hop
+# Hotel Booking Demand - Phân tích tổng hợp
 
-File nay tom tat noi dung trong notebook `DO_AN/phan-tich-tong-hop.ipynb`. Notebook ket hop hai ky thuat Classification va Clustering de phan tich rui ro huy phong tren bo du lieu Hotel Booking Demand.
+Tài liệu này mô tả notebook [`DO_AN/phan-tich-tong-hop.ipynb`](DO_AN/phan-tich-tong-hop.ipynb). Notebook kết hợp **Classification** và **Clustering** để nhận diện và giải thích rủi ro hủy booking trên bộ dữ liệu Hotel Booking Demand.
 
-## 1. Muc tieu bai toan
+## 1. Mục tiêu và câu hỏi phân tích
 
-Muc tieu nghiep vu la ho tro nha quan ly khach san nhan dien cac booking co nguy co huy phong cao, tu do dua ra chinh sach theo doi, uu tien xu ly hoac dieu chinh dat coc phu hop.
+Mục tiêu nghiệp vụ là hỗ trợ khách sạn nhận diện sớm booking có nguy cơ hủy và hiểu nhóm hành vi đứng sau rủi ro đó.
 
-Bien muc tieu duoc phan tich la:
+Notebook trả lời hai câu hỏi:
 
-- `is_canceled = 0`: booking khong huy.
-- `is_canceled = 1`: booking bi huy.
+1. Những đặc điểm nào của booking liên quan đến khả năng hủy?
+2. Các booking có thể được chia thành những nhóm hành vi có mức rủi ro hủy khác nhau hay không?
 
-Notebook tap trung tra loi hai cau hoi:
+Biến mục tiêu:
 
-1. Nhung dac diem cua booking co lien quan den kha nang huy phong hay khong?
-2. Cac booking co the duoc chia thanh nhung nhom hanh vi co muc rui ro huy khac nhau hay khong?
+- `is_canceled = 0`: booking không hủy.
+- `is_canceled = 1`: booking bị hủy.
 
-## 2. Du lieu su dung
+## 2. Dữ liệu sử dụng
 
-Notebook doc du lieu da tien xu ly tu file:
+Notebook chỉ đọc hai file trong `DO_AN/data/`:
 
 ```text
-data/processed/D1_hotel_booking/hotel_bookings_processed.csv
+DO_AN/data/hotel_bookings_processed.csv
+DO_AN/data/D1_metrics.csv
 ```
 
-Thong tin du lieu sau tien xu ly:
+Thông tin dữ liệu sau Bài 1:
 
-- So dong: `117,398`.
-- So cot: `43`.
-- Ty le huy phong trong toan bo du lieu: `37.49%`.
+- Số dòng: `117.398`.
+- Số cột: `43`.
+- Không hủy: `62,51%`.
+- Hủy phòng: `37,49%`.
 
-Notebook co ham `find_processed_data()` de tu dong tim file `hotel_bookings_processed.csv` theo nhieu duong dan tuong doi khac nhau, giup co the chay notebook tu thu muc `DO_AN` hoac thu muc goc du an.
+`is_canceled` không được dùng làm đầu vào tạo cluster. Nhãn hủy chỉ được ghép lại sau khi phân cụm để đánh giá rủi ro của từng nhóm.
 
-## 3. Thu vien can thiet
+## 3. Kết quả kỹ thuật kế thừa
 
-Du an su dung cac thu vien chinh:
+### 3.1. Classification từ Bài 2
 
-- `pandas`, `numpy`: xu ly bang du lieu va tinh toan.
-- `matplotlib`, `seaborn`: truc quan hoa du lieu.
-- `scikit-learn`: chuan hoa du lieu, phan cum DBSCAN va tinh metric.
-- `IPython.display`: hien thi bang va markdown trong notebook.
+| Mô hình | Accuracy | Precision | Recall | F1 | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Decision Tree | 0,7884 | 0,5788 | 0,8507 | 0,6888 | 0,8903 |
+| Logistic Regression | 0,7481 | 0,5289 | 0,7821 | 0,6310 | 0,8420 |
 
-Co the cai dat moi truong bang lenh:
+Decision Tree được chọn vì có F1 và ROC-AUC cao hơn Logistic Regression.
 
-```bash
-pip install -r requirements.txt
-```
+### 3.2. Clustering từ Bài 4
 
-## 4. Cau truc xu ly trong notebook
+| Thuật toán | Cấu hình | Số cụm | Silhouette | Davies-Bouldin | Noise |
+|---|---|---:|---:|---:|---:|
+| K-Means | `K=2` | 2 | 0,2226 | 2,5680 | 0% |
+| DBSCAN | `eps=9.0`, `min_samples=88` | 3 | 0,4146 | 0,9486 | 1,72% |
 
-### 4.1. Doc du lieu va cau hinh
+DBSCAN được dùng cho phân tích chính vì có Silhouette cao hơn, Davies-Bouldin thấp hơn và có khả năng nhận diện noise.
 
-Notebook khai bao cac tham so chinh:
+## 4. Sample phân tích DBSCAN
+
+Notebook tái tạo DBSCAN bằng đúng cấu hình của Bài 4:
 
 ```python
 RANDOM_STATE = 42
-CLASSIFICATION_SAMPLE_N = 40000
 DBSCAN_SAMPLE_N = 15000
 DBSCAN_EPS = 9.0
-```
-
-Thu muc luu bieu do:
-
-```text
-DO_AN/output/
-```
-
-### 4.2. Phan tich bien muc tieu
-
-Notebook tinh ty le cua bien `is_canceled`, sau do ve bieu do ty le booking huy va khong huy. Ket qua duoc luu tai:
-
-```text
-DO_AN/output/bieu_do_ty_le_huy_phong.png
-```
-
-### 4.3. Tong hop ket qua Classification
-
-Notebook doc metric Classification tu file `D1_metrics.csv`. Ket qua hien co:
-
-| Model | Accuracy | Precision | Recall | F1 | ROC-AUC |
-|---|---:|---:|---:|---:|---:|
-| Decision Tree | 0.7884 | 0.5788 | 0.8507 | 0.6888 | 0.8903 |
-| Logistic Regression | 0.7481 | 0.5289 | 0.7821 | 0.6310 | 0.8420 |
-
-Theo F1 va ROC-AUC, `Decision Tree` la mo hinh Classification tot nhat trong file metric hien co. Classification duoc dung de chung minh rang du lieu booking co tin hieu du doan kha nang huy phong.
-
-Bieu do so sanh metric Classification duoc luu tai:
-
-```text
-DO_AN/output/bieu_do_classification.png
-```
-
-### 4.4. Chuan bi du lieu cho Clustering
-
-Truoc khi chay DBSCAN, notebook loai bo cac cot khong dung de tao cluster:
-
-```python
-DROP_COLS = [
-    "is_canceled",
-    "country",
-    "agent",
-    "company",
-    "reserved_room_type",
-    "assigned_room_type",
-]
-```
-
-Ly do loai `is_canceled`: clustering phai duoc tao tu dac diem booking, khong dung truc tiep bien muc tieu huy phong. Sau khi co cluster, notebook moi ghep lai `is_canceled` de danh gia ty le huy theo tung nhom.
-
-Mot so buoc xu ly chinh:
-
-- Chuyen `arrival_date_month` tu ten thang sang so.
-- One-hot encode cac cot phan loai `distribution_channel` va `customer_type`.
-- Chuan hoa du lieu bang `StandardScaler`.
-- Lay sample `15,000` dong de chay DBSCAN.
-
-### 4.5. Chay DBSCAN
-
-Tham so DBSCAN:
-
-```python
-eps = 9.0
 min_samples = 88
-metric = "euclidean"
 ```
 
-Ket qua DBSCAN tren sample 15,000 dong:
+Các bước chính:
 
-- So cluster khong tinh noise: `3`.
-- Ty le noise: `1.72%`.
-- Silhouette khong tinh noise: `0.4146`.
-- Davies-Bouldin khong tinh noise: `0.9486`.
+1. Loại `is_canceled` và các cột không dùng để tạo cluster.
+2. Chuyển tháng sang dạng số và one-hot encode các biến phân loại còn lại.
+3. Chuẩn hóa bằng `StandardScaler`.
+4. Lấy cố định 15.000 dòng với seed 42.
+5. Chạy DBSCAN và gắn nhãn cluster trở lại từng booking.
 
-Notebook ke thua nhan xet tu Bai 4: DBSCAN co Silhouette cao hon va Davies-Bouldin thap hon K-Means, nen duoc chon lam cau hinh clustering chinh cho phan phan tich tong hop.
+Kết quả: 3 cluster và 258 điểm noise, tương ứng `1,72%` sample.
 
-## 5. Ket qua phan cum va rui ro huy phong
+## 5. Rủi ro hủy theo cluster
 
-Cancellation rate trung binh cua sample DBSCAN la `37.79%`.
+Tỷ lệ hủy trung bình của sample là khoảng `37,79%`.
 
-| Cluster | Nhan | So luong | Ty trong | So booking huy | Cancellation rate | Lift |
-|---:|---|---:|---:|---:|---:|---:|
-| 2 | cluster_2 | 99 | 0.66% | 52 | 52.53% | 1.39 |
-| 0 | cluster_0 | 14,509 | 96.73% | 5,524 | 38.07% | 1.01 |
-| 1 | cluster_1 | 134 | 0.89% | 37 | 27.61% | 0.73 |
-| -1 | noise | 258 | 1.72% | 56 | 21.71% | 0.57 |
+| Cluster | Số booking | Tỷ trọng | Tỷ lệ hủy | Lift so với sample |
+|---|---:|---:|---:|---:|
+| Noise | 258 | 1,72% | 21,71% | 0,57 |
+| Cluster 0 | 14.509 | 96,73% | 38,07% | 1,01 |
+| Cluster 1 | 134 | 0,89% | 27,61% | 0,73 |
+| Cluster 2 | 99 | 0,66% | 52,53% | 1,39 |
 
-Nhan xet:
+`cluster_2` có tỷ lệ hủy cao nhất nhưng chỉ gồm 99 booking, vì vậy cần diễn giải thận trọng.
 
-- `cluster_0` chiem phan lon sample va co cancellation rate gan trung binh.
-- `cluster_2` co cancellation rate cao nhat, cao hon trung binh sample voi lift `1.39`.
-- `cluster_1` co cancellation rate thap hon trung binh.
-- Nhom noise co cancellation rate thap nhat trong sample hien tai.
-- `cluster_1` va `cluster_2` co kich thuoc nho, nen can dien giai than trong.
+## 6. Tổng hợp Classification và Clustering
 
-## 6. Cac bieu do dau ra
+Đây là phần liên kỹ thuật chính của đồ án. Decision Tree sử dụng cấu hình tốt nhất từ Bài 2 và tạo dự đoán **5-fold out-of-fold** trên đúng 15.000 booking đã được DBSCAN gán cluster. Mỗi booking được dự đoán bởi mô hình chưa học chính booking đó.
 
-Notebook tao cac bieu do trong thu muc `DO_AN/output/`:
+Kết quả tổng thể trên sample đã align:
 
-- `bieu_do_ty_le_huy_phong.png`: ty le huy phong trong du lieu sau Bai 1.
-- `bieu_do_classification.png`: so sanh metric Classification.
-- `bieu_do_cluster_size.png`: kich thuoc cac cluster DBSCAN.
-- `bieu_do_cluster_size_thg_log.png`: kich thuoc cluster tren thang log.
-- `bieu_do_Cancellation_rate.png`: cancellation rate theo cluster.
-- `bieu_do_cluster_profiling.png`: heatmap chenh lech dac trung cua cluster so voi trung binh sample.
-- `bieu_do_bootstrap_ci.png`: khoang tin cay bootstrap 95% cho cancellation rate theo cluster.
+- F1: `0,7769`.
+- ROC-AUC: `0,9159`.
 
-## 7. Ky thuat nang cao: Bootstrap confidence interval
+### 6.1. Hiệu quả dự đoán theo cluster
 
-Do `cluster_1` va `cluster_2` co kich thuoc nho, notebook dung bootstrap confidence interval de kiem tra do on dinh cua cancellation rate theo cluster.
+| Cluster | N | Hủy thực tế | Xác suất dự đoán | Precision | Recall | F1 | FP | FN |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Noise | 258 | 21,71% | 28,26% | 0,576 | 0,607 | 0,591 | 25 | 22 |
+| Cluster 0 | 14.509 | 38,07% | 43,26% | 0,727 | 0,838 | 0,779 | 1.735 | 897 |
+| Cluster 1 | 134 | 27,61% | 42,28% | 0,579 | 0,892 | 0,702 | 24 | 4 |
+| Cluster 2 | 99 | 52,53% | 52,75% | 0,880 | 0,846 | 0,863 | 6 | 8 |
 
-Ham chinh:
+### 6.2. Quan hệ giữa hai kỹ thuật
 
-```python
-def bootstrap_cancel_rate(values, n_boot=2000, random_state=42):
-    rng = np.random.default_rng(random_state)
-    values = np.asarray(values)
-    boot_rates = []
+- **Xác nhận:** `cluster_2` có cả tỷ lệ hủy thực tế và xác suất hủy dự đoán cao nhất.
+- **Bổ sung:** Classification ước lượng rủi ro từng booking; Clustering giải thích booking thuộc nhóm hành vi nào.
+- **Điểm cần kiểm tra:** `cluster_1` có xác suất dự đoán trung bình cao hơn đáng kể tỷ lệ hủy thực tế. Cần xem xét false positive và cỡ mẫu nhỏ trước khi áp dụng.
 
-    for _ in range(n_boot):
-        sample = rng.choice(values, size=len(values), replace=True)
-        boot_rates.append(sample.mean())
+## 7. Feature importance và cluster profiling
 
-    boot_rates = np.asarray(boot_rates)
-    return values.mean(), np.percentile(boot_rates, 2.5), np.percentile(boot_rates, 97.5)
+Các đặc trưng quan trọng nhất của Decision Tree gồm:
+
+- `deposit_type_Non Refund`
+- `country_PRT`
+- `lead_time`
+- `total_of_special_requests`
+- `market_segment_Online TA`
+- `required_car_parking_spaces`
+- `agent`
+- `arrival_date_year`
+- `customer_type_Transient`
+- `previous_cancellations`
+
+Các đặc trưng nổi bật ở cả Classification và Clustering:
+
+- `lead_time`
+- `total_of_special_requests`
+- `adr`
+- `booking_changes`
+- `total_stay`
+
+Nhóm biến này vừa có đóng góp trong Decision Tree, vừa thể hiện khác biệt giữa các cluster.
+
+## 8. Kỹ thuật nâng cao: Bootstrap confidence interval
+
+Các cluster nhỏ có tỷ lệ hủy kém ổn định. Notebook dùng 2.000 lần bootstrap để ước lượng khoảng tin cậy 95% cho tỷ lệ hủy của từng cluster.
+
+| Cluster | N | Tỷ lệ hủy | Khoảng tin cậy 95% |
+|---|---:|---:|---:|
+| Cluster 2 | 99 | 52,53% | 42,42% - 62,63% |
+| Cluster 0 | 14.509 | 38,07% | 37,28% - 38,83% |
+| Cluster 1 | 134 | 27,61% | 20,15% - 35,82% |
+| Noise | 258 | 21,71% | 16,67% - 26,74% |
+
+Cluster 1 và cluster 2 có khoảng tin cậy rộng hơn cluster 0. Vì vậy, các nhóm nhỏ là tín hiệu đáng chú ý nhưng chưa nên được xem là kết luận tuyệt đối.
+
+## 9. Biểu đồ đầu ra
+
+Notebook chỉ tạo ba biểu đồ trong `DO_AN/output/`:
+
+```text
+DO_AN/output/bieu_do_cluster_risk_profile.png
+DO_AN/output/bieu_do_classification_theo_cluster.png
+DO_AN/output/bieu_do_bootstrap_ci.png
 ```
 
-Ket qua bootstrap cho thay cac cluster nho co khoang tin cay rong hon cluster lon. Vi vay, cac cluster nho co the duoc xem la tin hieu rui ro dang chu y, nhung chua nen dung nhu ket luan tuyet doi neu chua kiem tra them tren sample khac.
+- `bieu_do_cluster_risk_profile.png`: tỷ lệ hủy và heatmap profiling theo cluster.
+- `bieu_do_classification_theo_cluster.png`: tỷ lệ hủy thực tế và xác suất dự đoán theo cluster.
+- `bieu_do_bootstrap_ci.png`: khoảng tin cậy 95% cho tỷ lệ hủy.
 
-## 8. Ket luan chinh
+## 10. Phát hiện, hạn chế và khuyến nghị
 
-Notebook cho thay hai ky thuat Classification va Clustering bo sung cho nhau:
+### Phát hiện chính
 
-- Classification cho biet du lieu booking co tin hieu de du doan kha nang huy phong. Trong ket qua hien co, Decision Tree tot hon Logistic Regression theo F1 va ROC-AUC.
-- Clustering bang DBSCAN chia booking thanh cac nhom hanh vi khac nhau.
-- Khi ghep `is_canceled` sau buoc clustering, cac cluster co cancellation rate khac nhau, cho thay viec phan nhom co the ho tro phan tich rui ro huy phong.
+1. Decision Tree cho thấy dữ liệu có tín hiệu dự đoán hủy rõ ràng.
+2. Classification và Clustering cùng xác định cluster 2 là nhóm rủi ro cao nhất.
+3. Một số biến quan trọng của mô hình cũng là biến phân biệt hành vi giữa các cluster.
 
-Ket luan quan trong: day la moi lien he thong ke, khong phai quan he nhan qua. Ngoai ra, Classification dung sample 40,000 dong, con DBSCAN dung sample 15,000 dong, nen notebook chi tong hop theo xu huong va khong so sanh truc tiep tung dong giua hai ky thuat.
+### Hạn chế
 
-## 9. Khuyen nghi ung dung
+- Kết quả thể hiện quan hệ thống kê, không chứng minh quan hệ nhân quả.
+- Cluster 1 và cluster 2 có ít booking và khoảng tin cậy rộng.
+- DBSCAN nhạy với cách chuẩn hóa, `eps`, `min_samples` và sample được chọn.
 
-1. Theo doi ky cac nhom booking co cancellation rate cao hon trung binh.
-2. Khong ap dung cung mot chinh sach cho moi booking; nen phan tang booking theo muc rui ro.
-3. Dung Classification nhu cong cu canh bao som.
-4. Dung Clustering de giai thich cac nhom hanh vi va so sanh rui ro giua cac nhom.
-5. Kiem tra them do on dinh cua cac cluster nho truoc khi dua ra quyet dinh nghiep vu manh.
+### Khuyến nghị
 
-## 10. Cach chay lai notebook
+1. Dùng xác suất Classification để cảnh báo sớm và dùng cluster để lựa chọn cách xử lý phù hợp.
+2. Ưu tiên xác minh booking thuộc nhóm rủi ro cao trước khi áp dụng chính sách đặt cọc hoặc xác nhận lại.
+3. Kiểm tra các cluster nhỏ trên nhiều sample hoặc giai đoạn thời gian trước khi triển khai thực tế.
 
-Tu thu muc goc du an `data-mining`, cai dat thu vien:
+## 11. Cách chạy notebook
+
+Từ thư mục gốc dự án, cài đặt thư viện:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Sau do mo notebook:
+Mở file:
 
 ```text
 DO_AN/phan-tich-tong-hop.ipynb
 ```
 
-Chay lan luot cac cell tu tren xuong duoi bang Jupyter Notebook, JupyterLab hoac VS Code. Sau khi chay, cac bang ket qua se hien thi trong notebook va cac bieu do se duoc ghi vao thu muc `DO_AN/output/`.
+Chạy toàn bộ cell theo thứ tự từ trên xuống. Notebook hỗ trợ chạy từ thư mục gốc dự án hoặc từ thư mục `DO_AN`. Các bảng kết quả được hiển thị trực tiếp và ba biểu đồ được lưu vào `DO_AN/output/`.
+
+## 12. Kết luận
+
+Classification và Clustering bổ sung cho nhau: Decision Tree ước lượng rủi ro của từng booking, còn DBSCAN cung cấp nhóm hành vi để giải thích và ưu tiên hành động. Hai kỹ thuật xác nhận nhau ở cluster 2, nhưng kết quả của các cluster nhỏ cần tiếp tục được kiểm chứng bằng dữ liệu mới.
